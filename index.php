@@ -186,6 +186,11 @@ $dsn = "mysql:host=$host";
             outline: none;
             border:1px solid #007BFF
         }
+
+        .query-result
+        {
+            padding-top: 20px;
+        }
         
     </style>
     <script>
@@ -305,8 +310,8 @@ $dsn = "mysql:host=$host";
                         $total = $stmt->fetch(PDO::FETCH_ASSOC)['total'];
                         $totalPages = ceil($total / $limit);
                     
-                        
-                        echo "<div class=\"table-content collapsible open\">";
+                        $cls = isset($_POST['query']) ? '' : ' open';
+                        echo "<div class=\"table-content collapsible$cls\">";
                         echo "<button class=\"button-toggle toggle-structure\" data-open=\"-\" data-close=\"+\"></button>";
                         echo "<h3>Data in $table (Page $page)</h3>";
                         echo "<div class=\"table-content-inner\">";
@@ -368,6 +373,7 @@ $dsn = "mysql:host=$host";
                     <textarea name='query' rows='4' cols='50' spellcheck='false'></textarea><br>
                     <input type='submit' value='Execute'>
                   </form>";
+            
             if ($query) {
                 function executeQuery($pdo, $query) {
                     try {
@@ -390,7 +396,9 @@ $dsn = "mysql:host=$host";
                         echo "Error: " . $e->getMessage();
                     }
                 }
+                echo "<div class='query-result'>";
                 executeQuery($pdo, $query);
+                echo "</div>";
             }
         } catch (PDOException $e) {
             echo "Error: " . $e->getMessage();
@@ -399,3 +407,4 @@ $dsn = "mysql:host=$host";
     </div>
 </body>
 </html>
+
