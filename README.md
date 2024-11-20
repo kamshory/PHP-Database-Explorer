@@ -17,7 +17,7 @@ The application uses **PDO** for database interactions and includes a user-frien
 - **Table Structure**: Inspect the schema of the selected table.
 - **Data Pagination**: Browse table data with paginated results.
 - **Custom Queries**: Execute SQL queries and view the results in a formatted table.
-- **Collapsible Sidebar**: Toggle the visibility of table lists, table structures, and data.
+- **Collapsible Content**: Toggle the visibility of table structures and data.
 
 ---
 
