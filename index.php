@@ -56,9 +56,11 @@ $dsn = "mysql:host=$host";
             background-color: #f8f9fa;
             max-width: calc(100vw - 250px);
             overflow: auto;
+            max-height: calc(100vh - 0px);
         }
         h1, h3 {
             margin-bottom: 20px;
+            font-weight: normal;
         }
         table {
             border-collapse: collapse;
@@ -74,6 +76,7 @@ $dsn = "mysql:host=$host";
         }
         th {
             background-color: #f4f4f4;
+            color: #1c1c1c;
         }
         .pagination
         {
@@ -118,8 +121,8 @@ $dsn = "mysql:host=$host";
             padding-bottom: 10px;
         }
         #database-select{
-            padding: 4px 4px;
-            background-color: #FFFFFF;
+            padding: 5px 8px;
+            background-color: #ECECEC;
             border: 1px solid #ddd;
             width: 100%;
             box-sizing: border-box;
@@ -130,8 +133,18 @@ $dsn = "mysql:host=$host";
             max-height: calc(100vh - 150px);
             overflow: auto;
         }
+        .table-list li a{
+            width: 100%;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+        }
         .button-toggle{
             width: 20px;
+            padding: 1px 5px;
+            border: 1px solid #DDDDDD;
+            background-color: #EEEEEE;
+            cursor: pointer;
         }
         .collapsible > div
         {
@@ -167,7 +180,13 @@ $dsn = "mysql:host=$host";
         textarea
         {
             margin-bottom: 5px;
+            transition: background-color ease-in-out 0.2s;
         }
+        textarea:focus-visible{
+            outline: none;
+            border:1px solid #007BFF
+        }
+        
     </style>
     <script>
         window.onload = function() {
@@ -235,7 +254,14 @@ $dsn = "mysql:host=$host";
             showSidebarDatabases($pdo, $database, $table);
             showSidebarTables($pdo, $database, $table);
         } catch (PDOException $e) {
-            echo "Connection failed: " . $e->getMessage();
+            if($e->getCode() == 0x3D000 || strpos($e->getMessage(), '1046') !== false)
+            {
+                echo "Please choose one database";
+            }
+            else
+            {
+                echo "Connection failed: " . $e->getMessage();
+            }
         }
         ?>
     </div>
@@ -339,7 +365,7 @@ $dsn = "mysql:host=$host";
             // Query execution form
             echo "<h3>Execute Query</h3>";
             echo "<form method='post'>
-                    <textarea name='query' rows='4' cols='50'></textarea><br>
+                    <textarea name='query' rows='4' cols='50' spellcheck='false'></textarea><br>
                     <input type='submit' value='Execute'>
                   </form>";
             if ($query) {
