@@ -31,4 +31,4 @@ The application uses **PDO** for database interactions and includes a user-frien
 ## Installation
 1. Clone the repository or download the PHP file:
    ```bash
-   git clone [https://github.com/yourusername/php-database-explorer](https://github.com/kamshory/PHP-Database-Explorer).git
+   git clone [https://github.com/kamshory/PHP-Database-Explorer](https://github.com/kamshory/PHP-Database-Explorer).git
