@@ -121,7 +121,7 @@ $dsn = "mysql:host=$host";
             padding-bottom: 10px;
         }
         #database-select{
-            padding: 5px 8px;
+            padding: 4px 8px;
             background-color: #ECECEC;
             border: 1px solid #ddd;
             width: 100%;
